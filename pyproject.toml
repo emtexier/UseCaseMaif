@@ -7,7 +7,9 @@ authors = [
     { name = "Antonin Rouxel", email = "antonin.rouxel44@outlook.fr" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "whisperx>=3.7.4",
+]
 
 [project.scripts]
 usecasemaif = "usecasemaif:main"

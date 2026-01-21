@@ -1,0 +1,175 @@
+1
+00:00:04,097 --> 00:00:06,320
+[SPEAKER_01] Nade Garapin, Maïve, bonjour.
+
+2
+00:00:06,339 --> 00:00:08,682
+[SPEAKER_01] Oui, bonjour, c'est Madame Fontaine au téléphone.
+
+3
+00:00:08,702 --> 00:00:16,852
+[SPEAKER_01] Je vous appelle parce que j'ai eu un bris de glace au 2 janvier et le garage me relance parce qu'ils n'ont toujours pas été remboursés.
+
+4
+00:00:16,871 --> 00:00:18,833
+[SPEAKER_01] Vous pouvez savoir où ça en était ?
+
+5
+00:00:18,853 --> 00:00:20,074
+[SPEAKER_00] D'accord, je vais accéder à votre dossier.
+
+6
+00:00:20,094 --> 00:00:24,879
+[SPEAKER_00] Est-ce que vous pourriez me rappeler votre numéro de sociétaire ou la référence du dossier, s'il vous plaît ?
+
+7
+00:00:24,899 --> 00:00:30,425
+[SPEAKER_01] Alors, mon numéro de sociétaire, c'est...
+
+8
+00:00:30,405 --> 00:00:35,152
+[SPEAKER_01] Attendez, je le retrouve dans les mails.
+
+9
+00:00:35,171 --> 00:00:37,494
+[SPEAKER_00] Alors, si vous ne l'avez pas, vous n'embêtez pas, je vous retrouve autrement.
+
+10
+00:00:37,534 --> 00:00:41,000
+[SPEAKER_00] Rappelez-moi votre date de naissance, s'il vous plaît.
+
+11
+00:00:41,020 --> 00:00:42,862
+[SPEAKER_01] Attendez, je l'ai le numéro de sociétaire.
+
+12
+00:00:42,881 --> 00:00:48,909
+[SPEAKER_01] C'est 189 268 P. D'accord, je vous remercie.
+
+13
+00:00:48,969 --> 00:00:51,273
+[SPEAKER_01] Vous pouvez me rappeler votre date de naissance, s'il vous plaît ?
+
+14
+00:00:51,292 --> 00:00:53,375
+[SPEAKER_00] Le 14 avril 1967.
+
+15
+00:00:53,726 --> 00:00:56,070
+[SPEAKER_00] Parfait, je vous remercie.
+
+16
+00:00:56,090 --> 00:01:05,022
+[SPEAKER_00] Alors j'ai un dossier effectivement avec la Renault Twingo, un bris d'élément vitré sur le pare-brise, donc c'est un dossier qui est en cours de gestion chez nous.
+
+17
+00:01:05,042 --> 00:01:08,147
+[SPEAKER_01] D'accord, mais comment ça se fait que ça prend autant de temps ?
+
+18
+00:01:08,167 --> 00:01:15,837
+[SPEAKER_01] Là le garage me demande, il me dit que d'habitude ils sont remboursés plus rapidement, il comprend pas et moi il m'appelle deux fois par jour là.
+
+19
+00:01:17,268 --> 00:01:26,646
+[SPEAKER_00] Oui, alors effectivement, je vois que c'est un dossier qui a été ouvert le 1er janvier, donc on a des délais de gestion.
+
+20
+00:01:26,665 --> 00:01:35,141
+[SPEAKER_00] Je regarde, c'est un dossier pour l'instant qui est en cours d'analyses auprès d'un cabinet d'experts puisque le remplacement du barbrise a eu lieu.
+
+21
+00:01:35,391 --> 00:01:41,222
+[SPEAKER_00] On étudie les pièces que le garage nous a transmises, c'est-à-dire la facture des réparations.
+
+22
+00:01:41,242 --> 00:01:43,787
+[SPEAKER_01] Donc c'est un dossier qu'il y a encore de gestion.
+
+23
+00:01:43,807 --> 00:01:45,049
+[SPEAKER_01] Mais comment ça ?
+
+24
+00:01:45,069 --> 00:01:47,875
+[SPEAKER_01] Pourquoi il y a un expert qui étudie ?
+
+25
+00:01:47,894 --> 00:01:49,817
+[SPEAKER_01] C'est quoi le problème ?
+
+26
+00:01:49,837 --> 00:01:53,164
+[SPEAKER_00] Alors il n'y a aucun problème, c'est que toutes les factures qui sont
+
+27
+00:01:53,144 --> 00:01:56,688
+[SPEAKER_00] qui sont liés à une réparation auto, sont soumis à expertise.
+
+28
+00:01:56,748 --> 00:02:00,072
+[SPEAKER_00] En général, l'expert intervient avant la réparation.
+
+29
+00:02:00,111 --> 00:02:06,778
+[SPEAKER_00] Dans votre situation, le permis a été changé avant puisque je suppose que le carriage vous l'a remplacé avant de nous faire la déclaration.
+
+30
+00:02:06,819 --> 00:02:14,889
+[SPEAKER_00] Là, on est dans la modalité de gestion normale, à savoir l'expertise de la facture à distance.
+
+31
+00:02:14,908 --> 00:02:20,534
+[SPEAKER_00] On ne va pas voir votre véhicule, on va juste regarder si les prix pratiqués sont conformes aux prix du marché.
+
+32
+00:02:21,324 --> 00:02:26,413
+[SPEAKER_01] D'accord, et du coup il va être remboursé quand là, le garage ?
+
+33
+00:02:26,432 --> 00:02:36,769
+[SPEAKER_00] Alors on le tiendra informé, d'ailleurs on lui a envoyé un mail la semaine dernière pour l'informer de notre procès, donc normalement il n'est pas censé vous rappeler, donc si jamais il recommence à vous rappeler, dites-lui que c'est en cours de gestion chez nous.
+
+34
+00:02:36,788 --> 00:02:43,620
+[SPEAKER_01] Il m'appelle deux fois par jour, c'est usant, moi je me fais harceler parce que vous ne faites pas bien votre travail.
+
+35
+00:02:44,038 --> 00:02:56,991
+[SPEAKER_00] Alors je comprends, comme je vous le disais, si vous le souhaitez, vous pouvez soit ne pas leur répondre, soit leur dire que c'est en cours de gestion chez nous et que s'ils ont besoin d'une information, ils peuvent nous contacter directement puisqu'on leur a transmis nos coordonnées.
+
+36
+00:02:57,673 --> 00:03:02,056
+[SPEAKER_00] Donc c'est un dossier qui doit être exclusivement géré entre le garage et la maïf.
+
+37
+00:03:02,097 --> 00:03:10,164
+[SPEAKER_00] Normalement votre pare-brise, il est changé, donc vous n'avez pas vocation à intervenir et si vous ne souhaitez pas leur répondre, vous pouvez ignorer le rappel.
+
+38
+00:03:10,717 --> 00:03:16,847
+[SPEAKER_01] Ok, j'espère qu'ils ne vont pas me rappeler et que ça va être réglé au plus vite quand même.
+
+39
+00:03:16,866 --> 00:03:27,862
+[SPEAKER_00] En tous les cas, on s'y efforce et dès qu'on a un retour de toute façon, on leur fait part puisque c'est eux qui seront bénéficiaires du règlement, donc ils seront tenus informés.
+
+40
+00:03:27,883 --> 00:03:29,064
+[SPEAKER_00] Ok, bon, très bien.
+
+41
+00:03:29,085 --> 00:03:31,568
+[SPEAKER_01] Voilà, vous avez d'autres questions ?
+
+42
+00:03:31,588 --> 00:03:32,991
+[SPEAKER_01] Non, c'est bon.
+
+43
+00:03:33,010 --> 00:03:35,014
+[SPEAKER_01] Parfait, je vous remercie, bonne journée, au revoir.
+
+44
+00:03:35,033 --> 00:03:35,814
+[SPEAKER_01] Bonne journée, au revoir.

@@ -1,17 +1,41 @@
-import time
-import wave
+import argparse
+import io
+import json
 import os
+import re
+import shutil
+import tempfile
+import uuid
+import wave
 
-def get_wav_metadata(filepath):
+import ollama
+import torch
+from dotenv import load_dotenv
+from whisperx.transcribe import transcribe_task
+
+from web.preprocessing import preprocess_audio
+from web.summarize import summarize
+
+# Charger les variables d'environnement depuis le fichier .env
+load_dotenv()
+
+
+def get_wav_metadata(*, audio_data, filename):
     """
-    Extract real metadata from a WAV file.
+    Extract real metadata from WAV audio data.
+    Args:
+        audio_data: bytes object containing WAV audio data
+        filename: original filename for reference
     """
     try:
-        with wave.open(filepath, 'rb') as wav_file:
+        # Create a file-like object from bytes
+        audio_stream = io.BytesIO(audio_data)
+
+        with wave.open(audio_stream, "rb") as wav_file:
             sample_rate = wav_file.getframerate()
             n_frames = wav_file.getnframes()
             duration = n_frames / sample_rate
-            
+
             # Format duration
             if duration >= 60:
                 minutes = int(duration // 60)
@@ -19,43 +43,223 @@ def get_wav_metadata(filepath):
                 duration_str = f"{minutes}m {seconds}s"
             else:
                 duration_str = f"{duration:.1f}s"
-            
+
             # Format sample rate
             if sample_rate >= 1000:
                 sample_rate_str = f"{sample_rate / 1000:.1f}kHz"
             else:
                 sample_rate_str = f"{sample_rate}Hz"
-            
+
             return {
-                "filename": os.path.basename(filepath),
+                "filename": filename,
                 "duration": duration_str,
-                "sample_rate": sample_rate_str
+                "sample_rate": sample_rate_str,
             }
-    except Exception as e:
+    except Exception:
         return {
-            "filename": os.path.basename(filepath),
+            "filename": filename,
             "duration": "N/A",
-            "sample_rate": "N/A"
+            "sample_rate": "N/A",
         }
 
-def process_wav(filepath, first_speaker):
+
+def save_audio_to_temp(audio_data):
     """
-    Placeholder function to process the WAV file.
-    In the future, this will call the Nemo ASR model and other analysis tools.
+    Save audio data to a temporary file with a UUID filename for security.
+    Returns the path to the temporary file.
     """
-    # Get real metadata from the WAV file
-    metadata = get_wav_metadata(filepath)
-    
-    # Simulate processing time
-    time.sleep(1.5)
-    
-    # Mock Data - Transcript and emotions still to be replaced by actual analysis
-    return {
-        "transcript": "Bonjour, je vous appelle pour déclarer un sinistre concernant mon véhicule.",
-        "summary": "L'appel concerne la déclaration d'un sinistre automobile.",
-        "emotions": {
-            "primary": "Neutre",
-            "confidence": 85
-        },
-        "metadata": metadata
+    # Create a unique filename with UUID
+    unique_filename = f"{uuid.uuid4()}.wav"
+
+    # Create temp directory if it doesn't exist
+    temp_dir = tempfile.gettempdir()
+    temp_filepath = os.path.join(temp_dir, unique_filename)
+
+    # Write audio data to temp file
+    with open(temp_filepath, "wb") as f:
+        f.write(audio_data)
+
+    return temp_filepath
+
+
+def rename_speakers(*, text: str, first_speaker: str) -> str:
+    SPEAKERS_MAPPING = {
+        "SPEAKER_00": "Opérateur MAIF" if first_speaker == "maif" else "Sociétaire",
+        "SPEAKER_01": "Sociétaire" if first_speaker == "maif" else "Opérateur MAIF",
     }
+
+    for original_speaker, speaker_replacement in SPEAKERS_MAPPING.items():
+        text = text.replace(original_speaker, speaker_replacement)
+
+    return text
+
+
+def call_transcribe_task(
+    audio_filepath: str,
+    output_dir: str,
+):
+    args = {
+        "audio": [audio_filepath],
+        # model / runtime
+        "model": "large-v2",
+        "model_cache_only": False,
+        "model_dir": None,
+        "device": "cuda" if torch.cuda.is_available() else "cpu",
+        "device_index": 0,
+        "batch_size": 8,
+        "compute_type": "int8",
+        # output / logging
+        "output_dir": output_dir,
+        "output_format": "all",
+        "verbose": True,
+        "log_level": None,
+        # task / language
+        "task": "transcribe",
+        "language": "fr",
+        # alignment
+        "align_model": None,
+        "interpolate_method": "nearest",
+        "no_align": False,
+        "return_char_alignments": False,
+        # VAD
+        "vad_method": "pyannote",
+        "vad_onset": 0.5,
+        "vad_offset": 0.363,
+        "chunk_size": 30,
+        # diarization
+        "diarize": True,
+        "min_speakers": 2,
+        "max_speakers": 2,
+        "diarize_model": "pyannote/speaker-diarization-3.1",
+        "speaker_embeddings": False,
+        # decoding
+        "temperature": 0.0,
+        "best_of": 5,
+        "beam_size": 5,
+        "patience": 1.0,
+        "length_penalty": 1.0,
+        "suppress_tokens": "-1",
+        "suppress_numerals": False,
+        # prompts / fp16
+        "initial_prompt": None,
+        "condition_on_previous_text": False,
+        "fp16": True,
+        # fallback
+        "temperature_increment_on_fallback": 0.2,
+        "compression_ratio_threshold": 2.4,
+        "logprob_threshold": -1.0,
+        "no_speech_threshold": 0.6,
+        # formatting
+        "max_line_width": None,
+        "max_line_count": None,
+        "highlight_words": False,
+        "segment_resolution": "sentence",
+        # performance
+        "threads": 0,
+        # auth
+        "hf_token": os.getenv("HF_TOKEN"),
+        "print_progress": False,
+    }
+
+    parser = argparse.ArgumentParser()
+
+    transcribe_task(args, parser)
+
+
+def transcribe_with_whisperx(audio_filepath: str, first_speaker="maif"):
+    # Create a temp directory for whisperx output
+    output_dir = tempfile.mkdtemp()
+
+    try:
+        try:
+            # Run whisperx via CLI
+            call_transcribe_task(audio_filepath=audio_filepath, output_dir=output_dir)
+        except Exception as e:
+            print(f"Error WhisperX: {e}")
+            return None
+
+        # Read the output txt file
+        audio_basename = os.path.splitext(os.path.basename(audio_filepath))[0]
+        txt_output_path = os.path.join(output_dir, f"{audio_basename}.txt")
+
+        if os.path.exists(txt_output_path):
+            with open(txt_output_path, "r", encoding="utf-8") as f:
+                transcript = f.read().strip()
+                transcript = rename_speakers(
+                    text=transcript, first_speaker=first_speaker
+                )
+            with open(txt_output_path, "w", encoding="utf-8") as f:
+                f.write(transcript)
+            print(f"Transcript: {transcript}")
+            return transcript
+        else:
+            print(f"Output file not found: {txt_output_path}")
+            return None
+
+    finally:
+        # Clean up temp output directory
+        shutil.rmtree(output_dir, ignore_errors=True)
+
+
+def analyse_satisfaction_text(
+    *, transcription: str, llm_model_name: str = "llama3"
+) -> dict:
+    REGEX_BRACKETS = re.compile(r"\[.*?\]:\s*", re.IGNORECASE)
+    transcription = REGEX_BRACKETS.sub(transcription, "")
+    # Prompt pour le LLM
+    prompt = f"""
+    Tu es un analyste de satisfaction client.
+
+    Réponds STRICTEMENT en JSON valide.
+    AUCUN texte avant ou après.
+
+    Format exact :
+    {{"sentiment":"satisfait|neutre|insatisfait","note":0-10,"justification":"texte court"}}
+
+    Texte client :
+    \"\"\"{transcription}\"\"\"
+    """
+
+    print("Starting sentiment analysis call")
+
+    res = ollama.generate(model=llm_model_name, prompt=prompt)
+
+    print("Sentiment analysis call completed")
+    return json.loads(res["response"])
+
+
+def process_wav(audio_data, first_speaker="maif"):
+    # Save to temp file with UUID
+    temp_audio_path = save_audio_to_temp(audio_data)
+
+    preprocess_audio(file_path=temp_audio_path)
+
+    # Get real metadata from the WAV file
+    metadata = get_wav_metadata(audio_data=audio_data, filename=temp_audio_path)
+
+    try:
+        print("Starting transcription with whisperx")
+        # Transcribe with whisperx
+        transcript = transcribe_with_whisperx(
+            temp_audio_path, first_speaker=first_speaker
+        )
+
+        if transcript is None:
+            transcript = "Erreur lors de la transcription"
+
+        print(f"Transcription finale: {transcript}")
+
+        sentiments = analyse_satisfaction_text(transcription=transcript)
+        summary = summarize(transcript=transcript)
+
+        # Return placeholder response to frontend
+        return {
+            "transcript": transcript,
+            "emotions": sentiments,
+            "summary": summary,
+            "metadata": metadata,
+        }
+    finally:
+        # Clean up temp audio file
+        if os.path.exists(temp_audio_path):
+            os.remove(temp_audio_path)

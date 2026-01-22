@@ -12,8 +12,10 @@
 <body>
 
     <nav class="navbar">
-        <div class="brand-title">MAIF <span style="color:var(--maif-gray); font-weight:400;">AudioAnalyst</span></div>
-        <div style="font-size:0.9rem; color:#888;">Projet AI4Industry</div>
+        <div class="brand-title">
+            <img src="{{ url_for('static', filename='maif_logo.png') }}" alt="VocalisAI Logo" class="logo" />
+            <span style="color:var(--maif-gray); font-weight:400;">VocalisAI</span>
+        </div>
     </nav>
 
     <div class="main-wrapper">
@@ -26,7 +28,8 @@
                     <div class="upload-icon" id="uploadIcon">☁️</div>
                     <h3 id="uploadTitle">Téléverser un fichier audio</h3>
                     <p id="uploadSubtitle" style="color:#888;">Glisser-déposer ou cliquer pour parcourir</p>
-                    <input type="file" id="fileInput" class="file-input" accept=".wav,.mp3,.flac,.ogg,.m4a,.aac,.wma,audio/*" hidden>
+                    <input type="file" id="fileInput" class="file-input"
+                        accept=".wav,.mp3,.flac,.ogg,.m4a,.aac,.wma,audio/*" hidden>
                 </div>
 
                 <div class="speaker-choice">
@@ -59,13 +62,15 @@
                 <!-- Transcript Card -->
                 <div class="result-card">
                     <h3>Transcription</h3>
-                    <p id="transcriptText" style="line-height:1.6; color:#444; font-style: italic;">...</p>
+                    <pre id="transcriptText"
+                        style="line-height:1.6; color:#444; font-style: italic; white-space: pre-wrap;">...</pre>
+                    <a href="#" class="download-btn">Télécharger la transcription (.txt)</a>
                 </div>
 
                 <!-- Summary Card -->
                 <div class="result-card">
                     <h3>Résumé</h3>
-                    <p id="summaryText" style="line-height:1.6; color:#444;">...</p>
+                    <p id="summaryText" style="line-height:1.6; color:#444; white-space: pre-wrap;">...</p>
                 </div>
 
                 <!-- Emotions Card -->
@@ -76,8 +81,8 @@
                         <span class="data-value" id="emotionPrimary">--</span>
                     </div>
                     <div class="data-row">
-                        <span class="data-label">Confiance</span>
-                        <span class="data-value" id="emotionConfidence">--%</span>
+                        <span class="data-label">Note</span>
+                        <span class="data-value" id="emotionNote">x/10</span>
                     </div>
                 </div>
 

@@ -15,7 +15,7 @@ let selectedFile = null;
     uploadArea.addEventListener(eventName, preventDefaults, false);
 });
 
-function preventDefaults(e) { e.preventDefault(); e.stopPropagation(); }
+function preventDefaults (e) { e.preventDefault(); e.stopPropagation(); }
 
 ['dragenter', 'dragover'].forEach(eventName => {
     uploadArea.addEventListener(eventName, () => uploadArea.classList.add('dragover'), false);
@@ -29,19 +29,19 @@ uploadArea.addEventListener('drop', handleDrop, false);
 uploadArea.addEventListener('click', () => fileInput.click());
 fileInput.addEventListener('change', handleFiles);
 
-function handleDrop(e) {
+function handleDrop (e) {
     const dt = e.dataTransfer;
     const files = dt.files;
     handleFiles({ target: { files: files } });
 }
 
-function handleFiles(e) {
+function handleFiles (e) {
     const files = e.target.files;
     if (files.length > 0) {
         selectedFile = files[0];
         const allowedExtensions = ['wav', 'mp3', 'flac', 'ogg', 'm4a', 'aac', 'wma'];
         const fileExtension = selectedFile.name.toLowerCase().split('.').pop();
-        
+
         if (allowedExtensions.includes(fileExtension)) {
             // Mettre à jour la zone d'upload avec le fichier sélectionné
             uploadIcon.textContent = '🎵';
@@ -62,18 +62,10 @@ function handleFiles(e) {
         }
     }
 }
-// Fonction de réinitialisation (non utilisée actuellement)
-/*
-function resetUploadArea() {
-    uploadIcon.textContent = '☁️';
-    uploadTitle.textContent = 'Téléverser un fichier WAV';
-    uploadSubtitle.textContent = 'Glisser-déposer ou cliquer pour parcourir';
-    uploadArea.classList.remove('file-selected', 'file-error');
-}
-*/
+
 uploadBtn.addEventListener('click', uploadFile);
 
-async function uploadFile() {
+async function uploadFile () {
     if (!selectedFile) return;
 
     // UI Updates
@@ -87,7 +79,7 @@ async function uploadFile() {
 
     const formData = new FormData();
     formData.append('file', selectedFile);
-    
+
     // Récupérer le choix du premier locuteur
     const firstSpeaker = document.querySelector('input[name="firstSpeaker"]:checked').value;
     formData.append('first_speaker', firstSpeaker);
@@ -116,16 +108,16 @@ async function uploadFile() {
     }
 }
 
-function displayResults(data) {
+function displayResults (data) {
     emptyState.classList.add('hidden');
     resultsContent.classList.remove('hidden');
 
     // Populate fields
     if (data.analysis) {
-        document.getElementById('transcriptText').textContent = `"${data.analysis.transcript}"`;
+        document.getElementById('transcriptText').textContent = data.analysis.transcript;
         document.getElementById('summaryText').textContent = data.analysis.summary;
-        document.getElementById('emotionPrimary').textContent = data.analysis.emotions.primary;
-        document.getElementById('emotionConfidence').textContent = data.analysis.emotions.confidence + '%';
+        document.getElementById('emotionPrimary').textContent = data.analysis.emotions.sentiment;
+        document.getElementById('emotionNote').textContent = `${data.analysis.emotions.note}/10`;
         document.getElementById('fileFilename').textContent = data.analysis.metadata.filename;
         document.getElementById('fileDuration').textContent = data.analysis.metadata.duration;
         document.getElementById('fileSampleRate').textContent = data.analysis.metadata.sample_rate;

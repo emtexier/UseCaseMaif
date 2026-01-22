@@ -3,22 +3,16 @@ name = "usecasemaif"
 version = "0.1.0"
 description = "Pipeline de transcription audio avec diarization"
 readme = "README.md"
-authors = [
-    { name = "Antonin Rouxel", email = "antonin.rouxel44@outlook.fr" }
-]
 requires-python = ">=3.12"
 dependencies = [
+    "audiofile>=1.6.0",
     "flask>=3.1.2",
     "librosa>=0.11.0",
+    "ollama>=0.6.1",
     "pydantic>=2.12.5",
     "pydantic-settings>=2.12.0",
+    "pydub>=0.25.1",
     "python-dotenv>=1.2.1",
+    "rvadfast>=0.0.5",
     "whisperx>=3.7.4",
 ]
-
-[project.scripts]
-usecasemaif = "usecasemaif:main"
-
-[build-system]
-requires = ["uv_build>=0.9.21,<0.10.0"]
-build-backend = "uv_build"

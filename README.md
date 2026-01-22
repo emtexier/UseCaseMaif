@@ -35,6 +35,12 @@ Dans un terminal à part, lancez Ollama:
 ollama serve
 ```
 
+Télécharger le modèle llama3 :
+
+```bash
+ollama run llama3
+```
+
 Depuis la racine du projet :
 
 ```bash

@@ -38,7 +38,7 @@ def get_wav_metadata(filepath):
             "sample_rate": "N/A"
         }
 
-def process_wav(filepath):
+def process_wav(filepath, first_speaker):
     """
     Placeholder function to process the WAV file.
     In the future, this will call the Nemo ASR model and other analysis tools.

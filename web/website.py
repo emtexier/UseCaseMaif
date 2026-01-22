@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 # Configuration
 UPLOAD_FOLDER = os.path.join(BASE_DIR, 'wavs')
-ALLOWED_EXTENSIONS = {'wav'}
+ALLOWED_EXTENSIONS = {'wav', 'mp3', 'flac', 'ogg', 'm4a', 'aac', 'wma'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -51,7 +51,7 @@ def upload_file():
             'analysis': analysis_result
         }), 200
     else:
-        return jsonify({'error': 'Type de fichier invalide. Seul le format WAV est autorisé.'}), 400
+        return jsonify({'error': 'Type de fichier invalide. Formats autorisés : WAV, MP3, FLAC, OGG, M4A, AAC, WMA'}), 400
 
 if __name__ == '__main__':
     app.run(debug=True)

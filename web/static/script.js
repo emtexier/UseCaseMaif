@@ -39,19 +39,24 @@ function handleFiles(e) {
     const files = e.target.files;
     if (files.length > 0) {
         selectedFile = files[0];
-        if (selectedFile.name.toLowerCase().endsWith('.wav')) {
+        const allowedExtensions = ['wav', 'mp3', 'flac', 'ogg', 'm4a', 'aac', 'wma'];
+        const fileExtension = selectedFile.name.toLowerCase().split('.').pop();
+        
+        if (allowedExtensions.includes(fileExtension)) {
             // Mettre à jour la zone d'upload avec le fichier sélectionné
             uploadIcon.textContent = '🎵';
             uploadTitle.textContent = selectedFile.name;
             uploadSubtitle.textContent = 'Cliquer pour changer de fichier';
             uploadArea.classList.add('file-selected');
+            uploadArea.classList.remove('file-error');
             uploadBtn.disabled = false;
         } else {
             // Erreur: mauvais format
             uploadIcon.textContent = '⚠️';
             uploadTitle.textContent = 'Format invalide';
-            uploadSubtitle.textContent = 'Seuls les fichiers .wav sont autorisés';
+            uploadSubtitle.textContent = 'Formats acceptés : WAV, MP3, FLAC, OGG, M4A, AAC, WMA';
             uploadArea.classList.add('file-error');
+            uploadArea.classList.remove('file-selected');
             uploadBtn.disabled = true;
             selectedFile = null;
         }

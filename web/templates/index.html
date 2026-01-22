@@ -48,14 +48,14 @@
             <div id="resultsContent" class="hidden">
                 <!-- Transcript Card -->
                 <div class="result-card">
-                    <h3>📝 Transcription</h3>
+                    <h3>Transcription</h3>
                     <p id="transcriptText" style="line-height:1.6; color:#444; font-style: italic;">...</p>
                     <a href="#" class="download-btn">Télécharger la transcription (.txt)</a>
                 </div>
 
                 <!-- Emotions Card -->
                 <div class="result-card">
-                    <h3>😊 Analyse Émotionnelle</h3>
+                    <h3>Analyse Émotionnelle</h3>
                     <div class="data-row">
                         <span class="data-label">Émotion Principale</span>
                         <span class="data-value" id="emotionPrimary">--</span>
@@ -70,6 +70,10 @@
                 <div class="result-card">
                     <h3>ℹ️ Infos Fichier</h3>
                     <div class="data-row">
+                        <span class="data-label">Nom</span>
+                        <span class="data-value" id="fileFilename">--</span>
+                    </div>
+                    <div class="data-row">
                         <span class="data-label">Durée</span>
                         <span class="data-value" id="fileDuration">--</span>
                     </div>
@@ -77,6 +81,14 @@
                         <span class="data-label">Fréquence</span>
                         <span class="data-value" id="fileSampleRate">--</span>
                     </div>
+                </div>
+
+                <!-- Export Button -->
+                <div style="margin-top: 2rem; text-align: center;">
+                    <button id="downloadJsonBtn" class="btn-primary"
+                        style="background-color: var(--maif-gray); width: auto; padding: 0.8rem 1.5rem;">
+                        📥 Télécharger les résultats (JSON)
+                    </button>
                 </div>
             </div>
 

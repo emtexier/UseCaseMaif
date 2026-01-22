@@ -98,7 +98,36 @@ function displayResults(data) {
         document.getElementById('transcriptText').textContent = `"${data.analysis.transcript}"`;
         document.getElementById('emotionPrimary').textContent = data.analysis.emotions.primary;
         document.getElementById('emotionConfidence').textContent = data.analysis.emotions.confidence + '%';
+        document.getElementById('fileFilename').textContent = data.analysis.metadata.filename;
         document.getElementById('fileDuration').textContent = data.analysis.metadata.duration;
         document.getElementById('fileSampleRate').textContent = data.analysis.metadata.sample_rate;
     }
 }
+
+// Download JSON functionality
+const downloadJsonBtn = document.getElementById('downloadJsonBtn');
+let lastAnalysisData = null;
+
+// Intercept displayResults to save data
+const originalDisplayResults = displayResults;
+displayResults = function (data) {
+    lastAnalysisData = data;
+    originalDisplayResults(data);
+};
+
+downloadJsonBtn.addEventListener('click', () => {
+    if (!lastAnalysisData) return;
+
+    const navName = lastAnalysisData.filename || 'analyse_audio';
+    const jsonStr = JSON.stringify(lastAnalysisData, null, 2);
+    const blob = new Blob([jsonStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${navName}_resultats.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+});

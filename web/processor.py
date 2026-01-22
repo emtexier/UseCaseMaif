@@ -1,50 +1,17 @@
+import argparse
 import io
 import os
 import shutil
-import subprocess
 import tempfile
 import uuid
 import wave
 
-import lightning_fabric.utilities.cloud_io
+import torch
 from dotenv import load_dotenv
+from whisperx.transcribe import transcribe_task
 
 # Charger les variables d'environnement depuis le fichier .env
 load_dotenv()
-
-
-def patch_lightningfabric_load(path_or_url, map_location, weights_only):
-    from pathlib import Path
-
-    import torch
-
-    if not isinstance(path_or_url, (str, Path)):
-        # any sort of BytesIO or similar
-        return torch.load(
-            path_or_url,
-            map_location=map_location,  # type: ignore[arg-type] # upstream annotation is not correct
-            weights_only=weights_only,
-        )
-    if str(path_or_url).startswith("http"):
-        if weights_only is None:
-            weights_only = False
-
-        return torch.hub.load_state_dict_from_url(
-            str(path_or_url),
-            map_location=map_location,  # type: ignore[arg-type]
-            weights_only=weights_only,
-        )
-    fs = lightning_fabric.utilities.cloud_io.get_filesystem(path_or_url)
-    with fs.open(path_or_url, "rb") as f:
-        return torch.load(
-            f,
-            map_location=map_location,  # type: ignore[arg-type]
-            # monkeypatching is here
-            weights_only=False,  # weights_only,
-        )
-
-
-lightning_fabric.utilities.cloud_io._load = patch_lightningfabric_load
 
 
 def get_wav_metadata(*, audio_data, filename):
@@ -109,54 +76,100 @@ def save_audio_to_temp(audio_data):
     return temp_filepath
 
 
-def rename_speakers(*, filepath: str, first_speaker: str) -> None:
+def rename_speakers(*, text: str, first_speaker: str) -> str:
     SPEAKERS_MAPPING = {
         "SPEAKER_00": "Opérateur MAIF" if first_speaker == "maif" else "Sociétaire",
         "SPEAKER_01": "Sociétaire" if first_speaker == "maif" else "Opérateur MAIF",
     }
 
-    text = ""
-    with open(file=filepath, mode="r") as f:
-        text = f.read()
-
     for original_speaker, speaker_replacement in SPEAKERS_MAPPING.items():
         text = text.replace(original_speaker, speaker_replacement)
 
-    with open(file=filepath, mode="w") as f:
-        f.write(text)
+    return text
 
 
-def transcribe_with_whisperx(audio_filepath, first_speaker="maif"):
+def call_transcribe_task(
+    audio_filepath: str,
+    output_dir: str,
+):
+    args = {
+        "audio": [audio_filepath],
+        # model / runtime
+        "model": "large-v2",
+        "model_cache_only": False,
+        "model_dir": None,
+        "device": "cuda" if torch.cuda.is_available() else "cpu",
+        "device_index": 0,
+        "batch_size": 8,
+        "compute_type": "int8",
+        # output / logging
+        "output_dir": output_dir,
+        "output_format": "all",
+        "verbose": True,
+        "log_level": None,
+        # task / language
+        "task": "transcribe",
+        "language": "fr",
+        # alignment
+        "align_model": None,
+        "interpolate_method": "nearest",
+        "no_align": False,
+        "return_char_alignments": False,
+        # VAD
+        "vad_method": "pyannote",
+        "vad_onset": 0.5,
+        "vad_offset": 0.363,
+        "chunk_size": 30,
+        # diarization
+        "diarize": True,
+        "min_speakers": 2,
+        "max_speakers": 2,
+        "diarize_model": "pyannote/speaker-diarization-3.1",
+        "speaker_embeddings": False,
+        # decoding
+        "temperature": 0.0,
+        "best_of": 5,
+        "beam_size": 5,
+        "patience": 1.0,
+        "length_penalty": 1.0,
+        "suppress_tokens": "-1",
+        "suppress_numerals": False,
+        # prompts / fp16
+        "initial_prompt": None,
+        "condition_on_previous_text": False,
+        "fp16": True,
+        # fallback
+        "temperature_increment_on_fallback": 0.2,
+        "compression_ratio_threshold": 2.4,
+        "logprob_threshold": -1.0,
+        "no_speech_threshold": 0.6,
+        # formatting
+        "max_line_width": None,
+        "max_line_count": None,
+        "highlight_words": False,
+        "segment_resolution": "sentence",
+        # performance
+        "threads": 0,
+        # auth
+        "hf_token": os.getenv("HF_TOKEN"),
+        "print_progress": False,
+    }
+
+    parser = argparse.ArgumentParser()
+
+    transcribe_task(args, parser)
+
+
+def transcribe_with_whisperx(audio_filepath: str, first_speaker="maif"):
     # Create a temp directory for whisperx output
     output_dir = tempfile.mkdtemp()
 
     try:
-        # Run whisperx via CLI
-        cmd = [
-            "whisperx",
-            audio_filepath,
-            "--compute_type",
-            "int8",
-            "--diarize",
-            "--min_speakers",
-            "2",
-            "--max_speakers",
-            "2",
-            "--model",
-            "large-v2",
-            "--language",
-            "fr",
-            "--output_dir",
-            output_dir,
-            "--hf_token",
-            os.getenv("HF_TOKEN"),
-        ]
-        print(f"Running whisperx: {' '.join(cmd)}")
-
-        result = subprocess.run(cmd, capture_output=True, text=True)
-
-        if result.returncode != 0:
-            print(f"Whisperx error: {result.stderr}")
+        try:
+            # Run whisperx via CLI
+            call_transcribe_task(audio_filepath=audio_filepath, output_dir=output_dir)
+        except Exception as e:
+            print("Error WhisperX:", e)
             return None
 
         # Read the output txt file
@@ -166,7 +179,11 @@ def transcribe_with_whisperx(audio_filepath, first_speaker="maif"):
         if os.path.exists(txt_output_path):
             with open(txt_output_path, "r", encoding="utf-8") as f:
                 transcript = f.read().strip()
-                rename_speakers(filepath=txt_output_path, first_speaker=first_speaker)
+                transcript = rename_speakers(
+                    text=transcript, first_speaker=first_speaker
+                )
+            with open(txt_output_path, "w", encoding="utf-8") as f:
+                f.write(transcript)
             print(f"Transcript: {transcript}")
             return transcript
         else:

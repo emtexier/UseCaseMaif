@@ -3,7 +3,7 @@ import os
 from flask import Flask, jsonify, render_template, request
 from werkzeug.utils import secure_filename
 
-from . import processor
+from . import patch_lightning, processor
 
 # Obtenir le répertoire du script (web/)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

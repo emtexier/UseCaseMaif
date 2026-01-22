@@ -15,7 +15,7 @@ let selectedFile = null;
     uploadArea.addEventListener(eventName, preventDefaults, false);
 });
 
-function preventDefaults(e) { e.preventDefault(); e.stopPropagation(); }
+function preventDefaults (e) { e.preventDefault(); e.stopPropagation(); }
 
 ['dragenter', 'dragover'].forEach(eventName => {
     uploadArea.addEventListener(eventName, () => uploadArea.classList.add('dragover'), false);
@@ -29,13 +29,13 @@ uploadArea.addEventListener('drop', handleDrop, false);
 uploadArea.addEventListener('click', () => fileInput.click());
 fileInput.addEventListener('change', handleFiles);
 
-function handleDrop(e) {
+function handleDrop (e) {
     const dt = e.dataTransfer;
     const files = dt.files;
     handleFiles({ target: { files: files } });
 }
 
-function handleFiles(e) {
+function handleFiles (e) {
     const files = e.target.files;
     if (files.length > 0) {
         selectedFile = files[0];
@@ -68,7 +68,7 @@ function resetUploadArea() {
 */
 uploadBtn.addEventListener('click', uploadFile);
 
-async function uploadFile() {
+async function uploadFile () {
     if (!selectedFile) return;
 
     // UI Updates
@@ -82,7 +82,7 @@ async function uploadFile() {
 
     const formData = new FormData();
     formData.append('file', selectedFile);
-    
+
     // Récupérer le choix du premier locuteur
     const firstSpeaker = document.querySelector('input[name="firstSpeaker"]:checked').value;
     formData.append('first_speaker', firstSpeaker);
@@ -111,7 +111,7 @@ async function uploadFile() {
     }
 }
 
-function displayResults(data) {
+function displayResults (data) {
     emptyState.classList.add('hidden');
     resultsContent.classList.remove('hidden');
 

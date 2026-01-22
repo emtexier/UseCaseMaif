@@ -5,18 +5,25 @@ import tempfile
 import uuid
 import subprocess
 import shutil
+import io
 from dotenv import load_dotenv
 
 # Charger les variables d'environnement depuis le fichier .env
 load_dotenv()
 
 
-def get_wav_metadata(filepath):
+def get_wav_metadata(audio_data, filename):
     """
-    Extract real metadata from a WAV file.
+    Extract real metadata from WAV audio data.
+    Args:
+        audio_data: bytes object containing WAV audio data
+        filename: original filename for reference
     """
     try:
-        with wave.open(filepath, 'rb') as wav_file:
+        # Create a file-like object from bytes
+        audio_stream = io.BytesIO(audio_data)
+        
+        with wave.open(audio_stream, 'rb') as wav_file:
             sample_rate = wav_file.getframerate()
             n_frames = wav_file.getnframes()
             duration = n_frames / sample_rate
@@ -36,13 +43,13 @@ def get_wav_metadata(filepath):
                 sample_rate_str = f"{sample_rate}Hz"
             
             return {
-                "filename": os.path.basename(filepath),
+                "filename": filename,
                 "duration": duration_str,
                 "sample_rate": sample_rate_str
             }
     except Exception as e:
         return {
-            "filename": os.path.basename(filepath),
+            "filename": filename,
             "duration": "N/A",
             "sample_rate": "N/A"
         }
@@ -115,15 +122,11 @@ def transcribe_with_whisperx(audio_filepath):
         shutil.rmtree(output_dir, ignore_errors=True)
 
 
-def process_wav(filepath, first_speaker='maif'):
-    # Get real metadata from the WAV file
-    metadata = get_wav_metadata(filepath)
+def process_wav(audio_data, filename, first_speaker='maif'):
+    # Get real metadata from the audio data
+    metadata = get_wav_metadata(audio_data, filename)
     
-    # Read the audio file
-    with open(filepath, 'rb') as f:
-        audio_data = f.read()
-    
-    # Save to temp file with UUID
+    # Save to temp file with UUID for whisperx processing
     temp_audio_path = save_audio_to_temp(audio_data)
     
     try:

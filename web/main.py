@@ -9,11 +9,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__)
 
 # Configuration
-UPLOAD_FOLDER = os.path.join(BASE_DIR, 'wavs')
 ALLOWED_EXTENSIONS = {'wav'}
 
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -33,15 +30,16 @@ def upload_file():
     
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(save_path)
+        
+        # Lire les données audio directement depuis l'upload
+        audio_data = file.read()
         
         # Récupérer le choix du premier locuteur
         first_speaker = request.form.get('first_speaker', 'maif')
         
         # Call the external processor module
         try:
-            analysis_result = processor.process_wav(save_path, first_speaker=first_speaker)
+            analysis_result = processor.process_wav(audio_data, filename, first_speaker=first_speaker)
         except Exception as e:
             return jsonify({'error': f'Erreur lors du traitement: {str(e)}'}), 500
         

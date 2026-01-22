@@ -13,6 +13,7 @@ import torch
 from dotenv import load_dotenv
 from whisperx.transcribe import transcribe_task
 
+from web.preprocessing import preprocess_audio
 from web.summarize import summarize
 
 # Charger les variables d'environnement depuis le fichier .env
@@ -219,18 +220,19 @@ def analyse_satisfaction_text(
     \"\"\"{transcription}\"\"\"
     """
 
-    print("Starting ollama call")
+    print("Starting sentiment analysis call")
 
     res = ollama.generate(model=llm_model_name, prompt=prompt)
 
-    print("Ollama call completed")
-
+    print("Sentiment analysis call completed")
     return json.loads(res["response"])
 
 
 def process_wav(audio_data, first_speaker="maif"):
     # Save to temp file with UUID
     temp_audio_path = save_audio_to_temp(audio_data)
+
+    preprocess_audio(file_path=temp_audio_path)
 
     # Get real metadata from the WAV file
     metadata = get_wav_metadata(audio_data=audio_data, filename=temp_audio_path)

@@ -7,7 +7,10 @@ antlr4-python3-runtime==4.9.3
 anyio==4.12.1
 asteroid-filterbanks==0.4.0
 attrs==25.4.0
+audeer==2.3.1
+audiofile==1.6.0
 audioread==3.1.0
+audmath==1.4.4
 av==15.1.0
 blinker==1.9.0
 certifi==2026.1.4
@@ -80,6 +83,7 @@ pycparser==3.0
 pydantic==2.12.5
 pydantic-core==2.41.5
 pydantic-settings==2.12.0
+pydub==0.25.1
 pygments==2.19.2
 pyparsing==3.3.2
 python-dateutil==2.9.0.post0
@@ -93,6 +97,7 @@ requests==2.32.5
 rich==14.2.0
 ruamel-yaml==0.18.17
 ruamel-yaml-clib==0.2.15
+rvadfast==0.0.5
 safetensors==0.7.0
 scikit-learn==1.8.0
 scipy==1.17.0

@@ -180,6 +180,34 @@ wheels = [
 ]
 
 [[package]]
+name = "audeer"
+version = "2.3.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "tqdm" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/fc/58/4dd1de1ff88eb154c2b8be802045327df5a961e46e5310df6591f512646f/audeer-2.3.1.tar.gz", hash = "sha256:6e7e3d76582dfa51fa64e21d514ab20188733689bbaf1a39ef5652a487da40ca", size = 45089, upload-time = "2025-10-27T08:20:21.955Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/60/86/b52c66b0b5d5175f2f9f07e5c5ceb95f19f640c30ed43268b73866f0f976/audeer-2.3.1-py3-none-any.whl", hash = "sha256:525449348e6313dda4168e5b8ce3c50df023b1c7f6afc049a7b17cdd72897a9a", size = 41627, upload-time = "2025-10-27T08:20:20.764Z" },
+]
+
+[[package]]
+name = "audiofile"
+version = "1.6.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "audeer" },
+    { name = "audmath" },
+    { name = "numpy", version = "2.0.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.13'" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.13'" },
+    { name = "soundfile" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/50/17/57d9e6bb0cc0005c6402cf350b9c4d0c3eb107533a31700cf35972a0a981/audiofile-1.6.0.tar.gz", hash = "sha256:1ab33a79b4c49ea7b83c919888417657874b299990fb54c302d78123e4cae7df", size = 1215309, upload-time = "2026-01-15T09:31:13.14Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/45/0d/3a30e3ad2a9b2c25d0ba70f5c19fd1b09182800a510dbc607c169bf47beb/audiofile-1.6.0-py3-none-any.whl", hash = "sha256:217633dce9bde0081fa63ab327c88933e4c9d8e95ff0fa4bdbad5bd46f71c39c", size = 1219820, upload-time = "2026-01-15T09:31:11.451Z" },
+]
+
+[[package]]
 name = "audioop-lts"
 version = "0.2.2"
 source = { registry = "https://pypi.org/simple" }
@@ -246,6 +274,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/a1/4a/874ecf9b472f998130c2b5e145dcdb9f6131e84786111489103b66772143/audioread-3.1.0.tar.gz", hash = "sha256:1c4ab2f2972764c896a8ac61ac53e261c8d29f0c6ccd652f84e18f08a4cab190", size = 20082, upload-time = "2025-10-26T19:44:13.484Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/7e/16/fbe8e1e185a45042f7cd3a282def5bb8d95bb69ab9e9ef6a5368aa17e426/audioread-3.1.0-py3-none-any.whl", hash = "sha256:b30d1df6c5d3de5dcef0fb0e256f6ea17bdcf5f979408df0297d8a408e2971b4", size = 23143, upload-time = "2025-10-26T19:44:12.016Z" },
+]
+
+[[package]]
+name = "audmath"
+version = "1.4.4"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numpy", version = "2.0.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.13'" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.13'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/26/af/d69a2a9a3ce7f6608ad8752b440528f0c5344949177123632669e3748e80/audmath-1.4.4.tar.gz", hash = "sha256:ff5f0b6786b8013a9a3c54ef8d442cf10c455a026a4030b3d014143e0e02622d", size = 23717, upload-time = "2025-10-13T18:06:12.188Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d0/f3/da2ded0ca8f9c8db0bcf4255463112156ece371449856ebeca46de5fbfef/audmath-1.4.4-py3-none-any.whl", hash = "sha256:0556e5a595cf71660c958ffe2e4c3869316ec8b15eeb86f0ea0243b06f8ab7d5", size = 22396, upload-time = "2025-10-13T18:06:10.832Z" },
 ]
 
 [[package]]
@@ -2215,6 +2256,15 @@ wheels = [
 ]
 
 [[package]]
+name = "pydub"
+version = "0.25.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/fe/9a/e6bca0eed82db26562c73b5076539a4a08d3cffd19c3cc5913a3e61145fd/pydub-0.25.1.tar.gz", hash = "sha256:980a33ce9949cab2a569606b65674d748ecbca4f0796887fd6f46173a7b0d30f", size = 38326, upload-time = "2021-03-10T02:09:54.659Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a6/53/d78dc063216e62fc55f6b2eebb447f6a4b0a59f55c8406376f76bf959b08/pydub-0.25.1-py2.py3-none-any.whl", hash = "sha256:65617e33033874b59d87db603aa1ed450633288aefead953b30bded59cb599a6", size = 32327, upload-time = "2021-03-10T02:09:53.503Z" },
+]
+
+[[package]]
 name = "pygments"
 version = "2.19.2"
 source = { registry = "https://pypi.org/simple" }
@@ -2516,6 +2566,22 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/b9/17/4e01a602693b572149f92c983c1f25bd608df02c3f5cf50fd1f94e124a59/ruamel_yaml_clib-0.2.15-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:542d77b72786a35563f97069b9379ce762944e67055bea293480f7734b2c7e5e", size = 765882, upload-time = "2025-11-16T16:13:49.526Z" },
     { url = "https://files.pythonhosted.org/packages/9f/17/7999399081d39ebb79e807314de6b611e1d1374458924eb2a489c01fc5ad/ruamel_yaml_clib-0.2.15-cp314-cp314-win32.whl", hash = "sha256:424ead8cef3939d690c4b5c85ef5b52155a231ff8b252961b6516ed7cf05f6aa", size = 102567, upload-time = "2025-11-16T16:13:50.78Z" },
     { url = "https://files.pythonhosted.org/packages/d2/67/be582a7370fdc9e6846c5be4888a530dcadd055eef5b932e0e85c33c7d73/ruamel_yaml_clib-0.2.15-cp314-cp314-win_amd64.whl", hash = "sha256:ac9b8d5fa4bb7fd2917ab5027f60d4234345fd366fe39aa711d5dca090aa1467", size = 122847, upload-time = "2025-11-16T16:13:51.807Z" },
+]
+
+[[package]]
+name = "rvadfast"
+version = "0.0.5"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "audiofile" },
+    { name = "numpy", version = "2.0.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.13'" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.13'" },
+    { name = "scipy" },
+    { name = "tqdm" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/71/55/ced2ac77313f3ebcc4085b8ee3582f9455d83dd58a58dc02d23b8ec98c0f/rvadfast-0.0.5.tar.gz", hash = "sha256:c3be9924fac0d90052f1e690aabbc1dde793f864e9416229a1e86b9bdb166c9e", size = 17761, upload-time = "2025-06-05T09:36:03.694Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d7/86/4748be99b8a04f5a304807bb0815de999aa8862d443faa9ce7401c0d9780/rvadfast-0.0.5-py3-none-any.whl", hash = "sha256:5af6e9a4ec6582b46dbe28732f8af7e4a4a8171d1320dc934ee36164c8b08a5b", size = 18822, upload-time = "2025-06-05T09:36:02.675Z" },
 ]
 
 [[package]]
@@ -3168,23 +3234,29 @@ name = "usecasemaif"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "audiofile" },
     { name = "flask" },
     { name = "librosa" },
     { name = "ollama" },
     { name = "pydantic" },
     { name = "pydantic-settings" },
+    { name = "pydub" },
     { name = "python-dotenv" },
+    { name = "rvadfast" },
     { name = "whisperx" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "audiofile", specifier = ">=1.6.0" },
     { name = "flask", specifier = ">=3.1.2" },
     { name = "librosa", specifier = ">=0.11.0" },
     { name = "ollama", specifier = ">=0.6.1" },
     { name = "pydantic", specifier = ">=2.12.5" },
     { name = "pydantic-settings", specifier = ">=2.12.0" },
+    { name = "pydub", specifier = ">=0.25.1" },
     { name = "python-dotenv", specifier = ">=1.2.1" },
+    { name = "rvadfast", specifier = ">=0.0.5" },
     { name = "whisperx", specifier = ">=3.7.4" },
 ]
 

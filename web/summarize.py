@@ -49,5 +49,8 @@ Transcription :
 
 
 def summarize(*, transcript: str) -> str:
+    print("Starting summary call")
     prompt = BASE_PROMPT.format(transcript=transcript)
-    return ollama.generate(model="llama3", prompt=prompt)["response"]
+    response = ollama.generate(model="llama3", prompt=prompt)["response"]
+    print("Summary call completed")
+    return response

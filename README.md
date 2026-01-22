@@ -20,10 +20,10 @@
 ## Prérequis
 
 * **Python 3.12+** (voir `.python-version` / `pyproject.toml`)
-* **uv** (voir (https://docs.astral.sh/uv/)[https://docs.astral.sh/uv/])
+* **uv** (voir [https://docs.astral.sh/uv/](https://docs.astral.sh/uv/))
 * **GPU recommandé** (CUDA ou Apple Silicon MPS) pour WhisperX et les modèles LLM
 * **Hugging Face token** (pour PyAnnote / diarisation WhisperX)
-* **Ollama** (voir (https://ollama.com/)[https://ollama.com/])
+* **Ollama** (voir [https://ollama.com/](https://ollama.com/))
 
 ---
 

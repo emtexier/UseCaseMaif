@@ -57,7 +57,7 @@ L’interface est accessible sur : **[http://127.0.0.1:5000](http://127.0.0.1:50
 ## Structure du projet (réelle)
 
 ```
-USECASEMAIF/
+.
 ├── code_tests/                # Scripts et tests exploratoires
 ├── web/
 │   ├── __init__.py

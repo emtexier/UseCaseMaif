@@ -89,10 +89,10 @@ USECASEMAIF/
 │       └── style.css          # Styles CSS
 │
 ├── .env                       # Variables d’environnement (HF_TOKEN, etc.)
+├── .env.sample
 ├── .gitignore
 ├── .python-version
 ├── pyproject.toml
-├── requirements.txt
 ├── uv.lock
 └── README.md
 ```

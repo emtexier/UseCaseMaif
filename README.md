@@ -3,10 +3,8 @@
   <br />
 </h1>
 
-<p align="center">Prototype d’outil <b>local</b> d’analyse de conversations téléphoniques pour la MAIF, développé dans le cadre du <b>use case MAIF – AI4Industry</b>.
+<p align="center">VocalisAI - Prototype d’outil <b>local</b> d’analyse de conversations téléphoniques pour la MAIF, développé dans le cadre du <b>use case MAIF – AI4Industry</b>.
 </p>
-
-<p align="center"><i>"VocalisAI"</i></p>
 
 ---
 

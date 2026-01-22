@@ -49,16 +49,33 @@ def analyze_sentiment_french(text):
             })
 
     if results:
-        positive_count = sum(1 for r in results if r['label'] in ['5 stars', 'POSITIVE'])
-        negative_count = sum(1 for r in results if r['label'] in ['1 stars', '2 stars', 'NEGATIVE'])
+        positive_count = sum(
+            1 for r in results
+            if r["label"] in ["5 stars", "4 stars", "POSITIVE"]
+        )
+
+        negative_count = sum(
+            1 for r in results
+            if r["label"] in ["1 star", "2 stars", "NEGATIVE"]
+        )
+
+        neutral_count = sum(
+            1 for r in results
+            if r["label"] in ["3 stars", "NEUTRAL"]
+        )
+
         # Déterminer le sentiment global
         if negative_count > positive_count:
-            print("MÉCONTENTEMENT/FRUSTRATION")
+            sentiment_global = "Mécontentement"
         elif positive_count > negative_count:
-            print("SATISFACTION")
+            sentiment_global = "Satisfaction"
         else:
-            print("NEUTRE/MITIGÉ")
+            sentiment_global = "Neutre"
+
+        print(sentiment_global)
+
     return results
+
 
 
 def main():

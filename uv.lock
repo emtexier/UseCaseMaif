@@ -3107,7 +3107,7 @@ wheels = [
 [[package]]
 name = "usecasemaif"
 version = "0.1.0"
-source = { editable = "." }
+source = { virtual = "." }
 dependencies = [
     { name = "flask" },
     { name = "librosa" },

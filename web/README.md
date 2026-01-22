@@ -1,1 +1,0 @@
-# AI4Industry-2026---MAIF-web

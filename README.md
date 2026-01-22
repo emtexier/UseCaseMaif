@@ -41,6 +41,12 @@ Télécharger le modèle llama3 :
 ollama run llama3
 ```
 
+Configurer le token Hugging Face dans `.env` (voir exemple `.env.sample`) :
+
+```env
+HF_TOKEN=<token>
+```
+
 Depuis la racine du projet :
 
 ```bash
@@ -149,14 +155,6 @@ L’interface est accessible sur : **[http://127.0.0.1:5000](http://127.0.0.1:50
 * **python-dotenv**
 * **Pydantic**
 * Variables d’environnement via `.env`
-
-## Configuration importante
-
-Créer un fichier `.env` à la racine :
-
-```env
-HF_TOKEN=hf_xxxxxxxxxxxxxxxxx
-```
 
 ## Notes importantes
 

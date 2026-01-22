@@ -100,6 +100,27 @@ body {
     transform: translateY(-2px);
 }
 
+.upload-area.file-selected {
+    border-color: var(--maif-red);
+    border-style: solid;
+    background-color: rgba(252, 13, 26, 0.05);
+}
+
+.upload-area.file-selected h3 {
+    color: var(--maif-red);
+    word-break: break-all;
+    font-size: 1rem;
+}
+
+.upload-area.file-error {
+    border-color: #ff6b6b;
+    background-color: rgba(255, 107, 107, 0.05);
+}
+
+.upload-area.file-error .upload-icon {
+    color: #ff6b6b;
+}
+
 .upload-icon {
     font-size: 4rem;
     color: var(--maif-red);
@@ -189,6 +210,61 @@ body {
 
 .hidden {
     display: none;
+}
+
+/* Speaker Choice Radio Buttons */
+.speaker-choice {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.speaker-choice p {
+    margin: 0 0 0.8rem 0;
+}
+
+.radio-label {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 0.75rem;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--maif-gray);
+}
+
+.radio-label input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.radio-label input[type="radio"]:checked {
+    border-color: var(--maif-red);
+}
+
+.radio-label input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: var(--maif-red);
+    border-radius: 50%;
+}
+
+.radio-label:hover input[type="radio"] {
+    border-color: var(--maif-red);
 }
 
 .loader {

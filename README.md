@@ -6,7 +6,7 @@
 <p align="center">VocalisAI - Prototype d’outil <b>local</b> d’analyse de conversations téléphoniques pour la MAIF, développé dans le cadre du <b>use case MAIF – AI4Industry</b>.
 </p>
 
----
+
 
 ## Fonctionnalités
 
@@ -15,7 +15,7 @@
 * **Synthèse structurée** des appels,
 * **Interface web Flask**.
 
----
+
 
 ## Prérequis
 
@@ -25,7 +25,7 @@
 * **Hugging Face token** (pour PyAnnote / diarisation WhisperX)
 * **Ollama** (voir [https://ollama.com/](https://ollama.com/))
 
----
+
 
 ## Installation
 
@@ -33,7 +33,7 @@
 uv sync
 ```
 
----
+
 
 ## Lancement de l’application
 
@@ -51,7 +51,7 @@ uv run flask --app web/main.py run
 
 L’interface est accessible sur : **[http://127.0.0.1:5000](http://127.0.0.1:5000)**
 
----
+
 
 ## Utilisation
 
@@ -64,7 +64,7 @@ L’interface est accessible sur : **[http://127.0.0.1:5000](http://127.0.0.1:50
    * résumé structuré MAIF
    * métadonnées audio
 
----
+
 
 ## Structure du projet (réelle)
 
@@ -97,7 +97,7 @@ USECASEMAIF/
 └── README.md
 ```
 
----
+
 
 ## Description des modules clés
 
@@ -136,7 +136,7 @@ USECASEMAIF/
 * Contournement du problème `torch.load(weights_only=True)`
 * Nécessaire avec certaines versions de PyTorch / WhisperX
 
----
+
 
 ## Technologies utilisées
 
@@ -165,7 +165,7 @@ USECASEMAIF/
 * **Pydantic**
 * Variables d’environnement via `.env`
 
----
+
 
 ## Configuration importante
 
@@ -175,7 +175,7 @@ Créer un fichier `.env` à la racine :
 HF_TOKEN=hf_xxxxxxxxxxxxxxxxx
 ```
 
----
+
 
 ## Notes importantes
 
@@ -184,7 +184,7 @@ HF_TOKEN=hf_xxxxxxxxxxxxxxxxx
 * Le traitement peut être long sur CPU
 * Projet **prototype / expérimental**, non destiné à la production
 
----
+
 
 ## Statut du projet
 

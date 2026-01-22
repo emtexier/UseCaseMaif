@@ -58,7 +58,6 @@ L’interface est accessible sur : **[http://127.0.0.1:5000](http://127.0.0.1:50
 
 ```
 USECASEMAIF/
-├── .venv/                     # Environnement virtuel (local)
 ├── code_tests/                # Scripts et tests exploratoires
 ├── web/
 │   ├── __init__.py
@@ -67,10 +66,8 @@ USECASEMAIF/
 │   ├── preprocessing.py       # Prétraitement audio (VAD rVADfast)
 │   ├── summarize.py           # Synthèse structurée via LLM
 │   ├── patch_lightning.py     # Monkey-patch PyTorch / Lightning (compatibilité WhisperX)
-│   │
 │   ├── templates/
 │   │   └── index.html         # Interface utilisateur
-│   │
 │   └── static/
 │       ├── script.js          # Logique frontend (upload, requêtes)
 │       └── style.css          # Styles CSS

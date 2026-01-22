@@ -36,9 +36,12 @@ def upload_file():
         save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(save_path)
         
+        # Récupérer le choix du premier locuteur
+        first_speaker = request.form.get('first_speaker', 'maif')
+        
         # Call the external processor module
         try:
-            analysis_result = processor.process_wav(save_path)
+            analysis_result = processor.process_wav(save_path, first_speaker=first_speaker)
         except Exception as e:
             return jsonify({'error': f'Erreur lors du traitement: {str(e)}'}), 500
         

@@ -3,39 +3,59 @@ import whisper
 import torch
 
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
+def analyse_satisfaction_audio(
+    audio_path: str,
+    whisper_model_name: str = "tiny",
+    llm_model_name: str = "llama3",
+    language: str = "fr"
+) -> dict:
+    """
+    Transcrit un fichier audio puis analyse la satisfaction client via un LLM (Ollama).
 
-model = whisper.load_model("tiny", device=device)
+    :param audio_path: chemin vers le fichier audio (.wav, .mp3, etc.)
+    :param whisper_model_name: modèle Whisper à utiliser (tiny, base, small, medium, large)
+    :param llm_model_name: modèle Ollama (ex: llama3)
+    :param language: langue de transcription
+    :return: dictionnaire JSON (sentiment, note, justification)
+    """
 
+    device = "cuda" if torch.cuda.is_available() else "cpu"
 
-result = model.transcribe(
-    "processed_segments/Ciel mon mari.wav",
-    language="fr",
-    fp16=True
-)
+    # Chargement du modèle Whisper
+    model = whisper.load_model(whisper_model_name, device=device)
 
-#print(result2["text"])
+    # Transcription
+    result = model.transcribe(
+        audio_path,
+        language=language,
+        fp16=(device == "cuda")
+    )
 
-transcription = result
+    transcription = result["text"]
 
-prompt = f"""
-Tu es un analyste de satisfaction client.
-Réponds UNIQUEMENT en français et UNIQUEMENT en JSON.
+    # Prompt pour le LLM
+    prompt = f"""
+    Tu es un analyste de satisfaction client.
 
-repond uniquement dans ce format :
-{{
-  "sentiment": "satisfait | neutre | insatisfait",
-  "note": nombre entre 0 et 10,
-  "justification": "texte court en français"
-}}
-Texte : {transcription}
-"""
+    Réponds STRICTEMENT en JSON valide.
+    AUCUN texte avant ou après.
 
-result = subprocess.run(
-    ["ollama", "run", "llama3"],
-    input=prompt,
-    text=True,
-    capture_output=True
-)
+    Format exact :
+    {{"sentiment":"satisfait|neutre|insatisfait","note":0-10,"justification":"texte court"}}
 
-print(result.stdout)
+    Texte client :
+    \"\"\"{transcription}\"\"\"
+    """
+
+    # Appel à Ollama
+    llm_result = subprocess.run(
+        ["ollama", "run", llm_model_name],
+        input=prompt,
+        text=True,
+        capture_output=True,
+        encoding="utf-8"
+    )
+
+    # Retour JSON (texte → dict)
+    import json
+    return json.loads(llm_result.stdout.strip())

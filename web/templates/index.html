@@ -24,9 +24,10 @@
 
                 <div class="upload-area" id="uploadArea">
                     <div class="upload-icon" id="uploadIcon">☁️</div>
-                    <h3 id="uploadTitle">Téléverser un fichier WAV</h3>
+                    <h3 id="uploadTitle">Téléverser un fichier audio</h3>
                     <p id="uploadSubtitle" style="color:#888;">Glisser-déposer ou cliquer pour parcourir</p>
-                    <input type="file" id="fileInput" class="file-input" accept=".wav" hidden>
+                    <input type="file" id="fileInput" class="file-input"
+                        accept=".wav,.mp3,.flac,.ogg,.m4a,.aac,.wma,audio/*" hidden>
                 </div>
 
                 <div class="speaker-choice">
@@ -62,6 +63,13 @@
                     <pre id="transcriptText"
                         style="line-height:1.6; color:#444; font-style: italic; white-space: pre-wrap;">...</pre>
                     <a href="#" class="download-btn">Télécharger la transcription (.txt)</a>
+                    <p id="transcriptText" style="line-height:1.6; color:#444; font-style: italic;">...</p>
+                </div>
+
+                <!-- Summary Card -->
+                <div class="result-card">
+                    <h3>Résumé</h3>
+                    <p id="summaryText" style="line-height:1.6; color:#444;">...</p>
                 </div>
 
                 <!-- Emotions Card -->

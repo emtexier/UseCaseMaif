@@ -1,3 +1,8 @@
+"""
+Patch a line in lightning_fabric.utilities.cloud_io._load as it crashes WhisperX (seems to not be OS related)
+Needs to be loaded before importing package "whisperx"
+"""
+
 # patch_lightning.py
 import lightning_fabric.utilities.cloud_io as cloud_io
 

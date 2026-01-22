@@ -62,15 +62,7 @@ function handleFiles (e) {
         }
     }
 }
-// Fonction de réinitialisation (non utilisée actuellement)
-/*
-function resetUploadArea() {
-    uploadIcon.textContent = '☁️';
-    uploadTitle.textContent = 'Téléverser un fichier WAV';
-    uploadSubtitle.textContent = 'Glisser-déposer ou cliquer pour parcourir';
-    uploadArea.classList.remove('file-selected', 'file-error');
-}
-*/
+
 uploadBtn.addEventListener('click', uploadFile);
 
 async function uploadFile () {

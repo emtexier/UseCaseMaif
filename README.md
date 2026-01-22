@@ -6,16 +6,12 @@
 <p align="center">VocalisAI - Prototype d’outil <b>local</b> d’analyse de conversations téléphoniques pour la MAIF, développé dans le cadre du <b>use case MAIF – AI4Industry</b>.
 </p>
 
-
-
 ## Fonctionnalités
 
 * **Prétraitement audio** (VAD),
 * **Transcription avec diarisation**,
 * **Synthèse structurée** des appels,
 * **Interface web Flask**.
-
-
 
 ## Prérequis
 
@@ -25,15 +21,11 @@
 * **Hugging Face token** (pour PyAnnote / diarisation WhisperX)
 * **Ollama** (voir [https://ollama.com/](https://ollama.com/))
 
-
-
 ## Installation
 
 ```bash
 uv sync
 ```
-
-
 
 ## Lancement de l’application
 
@@ -51,8 +43,6 @@ uv run flask --app web/main.py run
 
 L’interface est accessible sur : **[http://127.0.0.1:5000](http://127.0.0.1:5000)**
 
-
-
 ## Utilisation
 
 1. Accéder à l’interface web
@@ -64,15 +54,12 @@ L’interface est accessible sur : **[http://127.0.0.1:5000](http://127.0.0.1:50
    * résumé structuré MAIF
    * métadonnées audio
 
-
-
 ## Structure du projet (réelle)
 
 ```
 USECASEMAIF/
 ├── .venv/                     # Environnement virtuel (local)
 ├── code_tests/                # Scripts et tests exploratoires
-│
 ├── web/
 │   ├── __init__.py
 │   ├── main.py                # Point d’entrée Flask
@@ -87,7 +74,6 @@ USECASEMAIF/
 │   └── static/
 │       ├── script.js          # Logique frontend (upload, requêtes)
 │       └── style.css          # Styles CSS
-│
 ├── .env                       # Variables d’environnement (HF_TOKEN, etc.)
 ├── .env.sample
 ├── .gitignore
@@ -96,8 +82,6 @@ USECASEMAIF/
 ├── uv.lock
 └── README.md
 ```
-
-
 
 ## Description des modules clés
 
@@ -136,8 +120,6 @@ USECASEMAIF/
 * Contournement du problème `torch.load(weights_only=True)`
 * Nécessaire avec certaines versions de PyTorch / WhisperX
 
-
-
 ## Technologies utilisées
 
 ### Interface Web
@@ -165,8 +147,6 @@ USECASEMAIF/
 * **Pydantic**
 * Variables d’environnement via `.env`
 
-
-
 ## Configuration importante
 
 Créer un fichier `.env` à la racine :
@@ -175,16 +155,12 @@ Créer un fichier `.env` à la racine :
 HF_TOKEN=hf_xxxxxxxxxxxxxxxxx
 ```
 
-
-
 ## Notes importantes
 
 * Les modèles sont téléchargés **au premier lancement**
 * La diarisation nécessite un **token Hugging Face**
 * Le traitement peut être long sur CPU
 * Projet **prototype / expérimental**, non destiné à la production
-
-
 
 ## Statut du projet
 

@@ -52,6 +52,7 @@ def process_wav(filepath, first_speaker):
     # Mock Data - Transcript and emotions still to be replaced by actual analysis
     return {
         "transcript": "Bonjour, je vous appelle pour déclarer un sinistre concernant mon véhicule.",
+        "summary": "L'appel concerne la déclaration d'un sinistre automobile.",
         "emotions": {
             "primary": "Neutre",
             "confidence": 85

@@ -123,6 +123,7 @@ function displayResults(data) {
     // Populate fields
     if (data.analysis) {
         document.getElementById('transcriptText').textContent = `"${data.analysis.transcript}"`;
+        document.getElementById('summaryText').textContent = data.analysis.summary;
         document.getElementById('emotionPrimary').textContent = data.analysis.emotions.primary;
         document.getElementById('emotionConfidence').textContent = data.analysis.emotions.confidence + '%';
         document.getElementById('fileFilename').textContent = data.analysis.metadata.filename;

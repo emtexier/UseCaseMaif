@@ -1,6 +1,10 @@
-# VocalisAI – Interface Web
+<h1 align="center">
+  <img src="Logo_Maif_2019.svg.png" alt="MAIF" style="height: 200px;">
+  <br />
+</h1>
 
-Prototype d’outil **local** d’analyse de conversations téléphoniques pour la MAIF, développé dans le cadre du **use case MAIF – AI4Industry**.
+<p align="center">VocalisAI - Prototype d’outil <b>local</b> d’analyse de conversations téléphoniques pour la MAIF, développé dans le cadre du <b>use case MAIF – AI4Industry</b>.
+</p>
 
 L’application permet :
 
@@ -17,6 +21,7 @@ L’application permet :
 * **pip** ou **uv**
 * **GPU recommandé** (CUDA ou Apple Silicon MPS) pour WhisperX et les modèles LLM
 * **Hugging Face token** (pour PyAnnote / diarisation WhisperX)
+* **Ollama** (voir (https://ollama.com/)[https://ollama.com/])
 
 ---
 

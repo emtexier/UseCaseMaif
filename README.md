@@ -18,7 +18,7 @@ L’application permet :
 ## Prérequis
 
 * **Python 3.12+** (voir `.python-version` / `pyproject.toml`)
-* **pip** ou **uv**
+* **uv** (voir (https://docs.astral.sh/uv/)[https://docs.astral.sh/uv/])
 * **GPU recommandé** (CUDA ou Apple Silicon MPS) pour WhisperX et les modèles LLM
 * **Hugging Face token** (pour PyAnnote / diarisation WhisperX)
 * **Ollama** (voir (https://ollama.com/)[https://ollama.com/])
@@ -26,23 +26,6 @@ L’application permet :
 ---
 
 ## Installation
-
-### 1. Environnement virtuel
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
-```
-
-### 2. Installation des dépendances
-
-Avec **pip** :
-
-```bash
-pip install -r requirements.txt
-```
-
-Avec **uv (recommandé)** :
 
 ```bash
 uv sync

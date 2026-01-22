@@ -1,6 +1,17 @@
 # VocalisAI – Interface Web
 
-Prototype d’outil **local** d’analyse de conversations téléphoniques pour la MAIF, développé dans le cadre du **use case MAIF – AI4Industry**.
+
+<h1 align="center">
+  <img src="Logo_Maif_2019.svg.png" alt="MAIF">
+  <br />
+</h1>
+
+<p align="center">Prototype d’outil <b>local</b> d’analyse de conversations téléphoniques pour la MAIF, développé dans le cadre du <b>use case MAIF – AI4Industry</b>.
+</p>
+
+<p align="center"><i>"MAIF – AI4Industry"</i></p>
+
+---
 
 L’application permet :
 

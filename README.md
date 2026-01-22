@@ -1,6 +1,3 @@
-# VocalisAI – Interface Web
-
-
 <h1 align="center">
   <img src="Logo_Maif_2019.svg.png" alt="MAIF">
   <br />
@@ -9,7 +6,7 @@
 <p align="center">Prototype d’outil <b>local</b> d’analyse de conversations téléphoniques pour la MAIF, développé dans le cadre du <b>use case MAIF – AI4Industry</b>.
 </p>
 
-<p align="center"><i>"MAIF – AI4Industry"</i></p>
+<p align="center"><i>"VocalisAI"</i></p>
 
 ---
 

@@ -124,8 +124,8 @@ function displayResults (data) {
     if (data.analysis) {
         document.getElementById('transcriptText').textContent = data.analysis.transcript;
         document.getElementById('summaryText').textContent = data.analysis.summary;
-        document.getElementById('emotionPrimary').textContent = data.analysis.emotions.primary;
-        document.getElementById('emotionConfidence').textContent = data.analysis.emotions.confidence + '%';
+        document.getElementById('emotionPrimary').textContent = data.analysis.emotions.sentiment;
+        document.getElementById('emotionNote').textContent = `${data.analysis.emotions.note}/10`;
         document.getElementById('fileFilename').textContent = data.analysis.metadata.filename;
         document.getElementById('fileDuration').textContent = data.analysis.metadata.duration;
         document.getElementById('fileSampleRate').textContent = data.analysis.metadata.sample_rate;

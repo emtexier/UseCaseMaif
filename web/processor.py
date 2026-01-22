@@ -1,14 +1,19 @@
 import argparse
 import io
+import json
 import os
+import re
 import shutil
 import tempfile
 import uuid
 import wave
 
+import ollama
 import torch
 from dotenv import load_dotenv
 from whisperx.transcribe import transcribe_task
+
+from web.summarize import summarize
 
 # Charger les variables d'environnement depuis le fichier .env
 load_dotenv()
@@ -169,7 +174,7 @@ def transcribe_with_whisperx(audio_filepath: str, first_speaker="maif"):
             # Run whisperx via CLI
             call_transcribe_task(audio_filepath=audio_filepath, output_dir=output_dir)
         except Exception as e:
-            print("Error WhisperX:", e)
+            print(f"Error WhisperX: {e}")
             return None
 
         # Read the output txt file
@@ -195,6 +200,34 @@ def transcribe_with_whisperx(audio_filepath: str, first_speaker="maif"):
         shutil.rmtree(output_dir, ignore_errors=True)
 
 
+def analyse_satisfaction_text(
+    *, transcription: str, llm_model_name: str = "llama3"
+) -> dict:
+    REGEX_BRACKETS = re.compile(r"\[.*?\]:\s*", re.IGNORECASE)
+    transcription = REGEX_BRACKETS.sub(transcription, "")
+    # Prompt pour le LLM
+    prompt = f"""
+    Tu es un analyste de satisfaction client.
+
+    Réponds STRICTEMENT en JSON valide.
+    AUCUN texte avant ou après.
+
+    Format exact :
+    {{"sentiment":"satisfait|neutre|insatisfait","note":0-10,"justification":"texte court"}}
+
+    Texte client :
+    \"\"\"{transcription}\"\"\"
+    """
+
+    print("Starting ollama call")
+
+    res = ollama.generate(model=llm_model_name, prompt=prompt)
+
+    print("Ollama call completed")
+
+    return json.loads(res["response"])
+
+
 def process_wav(audio_data, first_speaker="maif"):
     # Save to temp file with UUID
     temp_audio_path = save_audio_to_temp(audio_data)
@@ -203,6 +236,7 @@ def process_wav(audio_data, first_speaker="maif"):
     metadata = get_wav_metadata(audio_data=audio_data, filename=temp_audio_path)
 
     try:
+        print("Starting transcription with whisperx")
         # Transcribe with whisperx
         transcript = transcribe_with_whisperx(
             temp_audio_path, first_speaker=first_speaker
@@ -213,10 +247,14 @@ def process_wav(audio_data, first_speaker="maif"):
 
         print(f"Transcription finale: {transcript}")
 
+        sentiments = analyse_satisfaction_text(transcription=transcript)
+        summary = summarize(transcript=transcript)
+
         # Return placeholder response to frontend
         return {
             "transcript": transcript,
-            "emotions": {"primary": "En cours d'analyse...", "confidence": 0},
+            "emotions": sentiments,
+            "summary": summary,
             "metadata": metadata,
         }
     finally:

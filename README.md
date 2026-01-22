@@ -4,7 +4,7 @@ Prototype d’outil local d’analyse de conversations téléphoniques pour la M
 
 ## 📋 Prérequis
 
-- Python 3.11+
+- Python 3.12+
 - pip
 
 ## 🚀 Installation
@@ -13,12 +13,12 @@ Prototype d’outil local d’analyse de conversations téléphoniques pour la M
 
 # Linux / Mac
 
-python -m venv venv
+python3.12 -m venv venv
 source venv/bin/activate
 
 # Windows
 
-python -m venv venv
+python3.12 -m venv venv
 venv\Scripts\activate
 
 # Pour quitter l’environnement virtuel :
@@ -30,7 +30,7 @@ deactivate
 2. **Installer les dépendances Python**
 
 ```bash
-pip install whisper torch subprocess transformers audiofile numpy rVADfast pydub jiwer processor werkzeug.utils
+uv pip install -r requirements.txt
 ```
 
 2. **Structure des dossiers**
@@ -42,7 +42,7 @@ Le dossier `wavs/` sera automatiquement créé au premier lancement pour stocker
 Depuis la racine du projet :
 
 ```bash
-python web/website.py
+python3 web/main.py
 ```
 
 L'application est accessible sur `http://127.0.0.1:5000`
@@ -62,26 +62,26 @@ L'application est accessible sur `http://127.0.0.1:5000`
 
 ```
 web/
-├── website.py          # Serveur Flask principal
+├── main.py             # Serveur Flask principal
 ├── processor.py        # Module de traitement audio
 ├── templates/
 │   └── index.html      # Interface utilisateur
 ├── static/
 │   ├── script.js       # Logique client
 │   └── style.css       # Styles MAIF
-└── wavs/              # Dossier uploads (créé auto)
+└── wavs/               # Dossier uploads (créé auto)
 ```
 
 ## ⚙️ Configuration
 
-- **Port** : Par défaut 5000 (modifiable dans `website.py`)
+- **Port** : Par défaut 5000 (modifiable dans `main.py`)
 - **Mode debug** : Activé par défaut (`debug=True`)
 - **Formats acceptés** : WAV uniquement
 - **Dossier uploads** : `web/wavs/`
 
 ## 🔧 Développement
 
-Pour désactiver le mode debug en production, modifier dans `website.py` :
+Pour désactiver le mode debug en production, modifier dans `main.py` :
 
 ```python
 app.run(debug=False)

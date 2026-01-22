@@ -49,8 +49,7 @@ Depuis la racine du projet :
 uv run flask --app web/main.py run
 ```
 
-L’interface est accessible sur :
-👉 **[http://127.0.0.1:5000](http://127.0.0.1:5000)**
+L’interface est accessible sur : **[http://127.0.0.1:5000](http://127.0.0.1:5000)**
 
 ---
 
@@ -189,8 +188,8 @@ HF_TOKEN=hf_xxxxxxxxxxxxxxxxx
 
 ## Statut du projet
 
-* ✔ Pipeline fonctionnel
-* ✔ Interface web opérationnelle
-* ✔ Prétraitement audio robuste
-* ⚠ Optimisations GPU / perfs en cours
-* ⚠ Gestion des erreurs WhisperX dépendante des versions PyTorch
+* [x] Pipeline fonctionnel
+* [x] Interface web opérationnelle
+* [x] Prétraitement audio robuste
+* [ ] Optimisations GPU / perfs en cours
+* [ ] Gestion des erreurs WhisperX dépendante des versions PyTorch

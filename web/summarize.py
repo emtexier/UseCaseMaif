@@ -84,7 +84,7 @@ def summarize_call(model, transcript: str, max_new_tokens: int = 1024) -> str:
     return tokenizer.decode(generated, skip_special_tokens=True).strip()
  
 
-def main(transcript: str, model_name: str = "Qwen/Qwen3-30B-A3B-Instruct-2507") -> str:
+def main(transcript: str, model_name: str = "Qwen/Qwen3-4B-Instruct-2507") -> str:
   global tokenizer, model
 
   device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

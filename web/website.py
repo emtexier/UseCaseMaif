@@ -3,10 +3,13 @@ from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
 import processor
 
+# Obtenir le répertoire du script (web/)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 app = Flask(__name__)
 
 # Configuration
-UPLOAD_FOLDER = 'wavs'
+UPLOAD_FOLDER = os.path.join(BASE_DIR, 'wavs')
 ALLOWED_EXTENSIONS = {'wav'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER

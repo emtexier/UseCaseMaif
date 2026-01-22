@@ -1,6 +1,6 @@
 # MAIF AudioAnalyst - Interface Web
 
-Interface web Flask pour l'analyse automatique de fichiers audio (transcription, analyse émotionnelle, diarisation).
+Prototype d’outil local d’analyse de conversations téléphoniques pour la MAIF, incluant transcription, diarisation et analyse émotionnelle, développé dans le cadre du projet VocalisAI.
 
 ## 📋 Prérequis
 
@@ -9,10 +9,28 @@ Interface web Flask pour l'analyse automatique de fichiers audio (transcription,
 
 ## 🚀 Installation
 
-1. **Installer les dépendances Python**
+1. **Créer un environnement virtuel**
+
+# Linux / Mac
+
+python -m venv venv
+source venv/bin/activate
+
+# Windows
+
+python -m venv venv
+venv\Scripts\activate
+
+# Pour quitter l’environnement virtuel :
 
 ```bash
-pip install flask werkzeug
+deactivate
+```
+
+2. **Installer les dépendances Python**
+
+```bash
+pip install whisper torch subprocess transformers audiofile numpy rVADfast pydub jiwer processor werkzeug.utils
 ```
 
 2. **Structure des dossiers**
@@ -27,12 +45,12 @@ Depuis la racine du projet :
 python web/website.py
 ```
 
-L'application sera accessible sur `http://127.0.0.1:5000`
+L'application est accessible sur `http://127.0.0.1:5000`
 
 ## 🎯 Utilisation
 
 1. Accéder à l'interface web dans votre navigateur
-2. Téléverser un fichier audio (WAV) par glisser-déposer ou en cliquant sur la zone
+2. Téléverser un fichier audio (WAV) par glisser-déposer ou en cliquant sur la zone de dépôt
 3. Sélectionner qui parle en premier (MAIF ou Sociétaire)
 4. Cliquer sur "Lancer l'analyse"
 5. Les résultats s'affichent dans le panneau de droite :

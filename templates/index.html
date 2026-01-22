@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAIF Analyse Audio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="brand-title">MAIF <span style="color:var(--maif-gray); font-weight:400;">AudioAnalyst</span></div>
+        <div style="font-size:0.9rem; color:#888;">Projet AI4Industry</div>
+    </nav>
+
+    <div class="main-wrapper">
+        <!-- Left Panel: UPLOAD -->
+        <div class="split-panel left-panel">
+            <div class="upload-container">
+                <div class="panel-header">Importer le Fichier Source</div>
+
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">☁️</div>
+                    <h3>Téléverser un fichier WAV</h3>
+                    <p style="color:#888;">Glisser-déposer ou cliquer pour parcourir</p>
+                    <input type="file" id="fileInput" class="file-input" accept=".wav" hidden>
+                </div>
+
+                <p id="fileName" style="margin-top: 1.5rem; font-weight: 600; min-height: 1.2em;"></p>
+
+                <button id="uploadBtn" class="btn-primary" disabled>Lancer l'analyse</button>
+                <div id="status" style="margin-top: 1rem;"></div>
+            </div>
+        </div>
+
+        <!-- Right Panel: DOWNLOAD / RESULTS -->
+        <div class="split-panel right-panel" id="resultsPanel">
+            <div class="panel-header">Résultats de l'analyse</div>
+
+            <div id="emptyState" style="text-align:center; color:#cecece; margin-top: 5rem;">
+                <div style="font-size:3rem; margin-bottom:1rem;">📊</div>
+                <p>Importez un fichier pour voir les résultats ici</p>
+            </div>
+
+            <div id="resultsContent" class="hidden">
+                <!-- Transcript Card -->
+                <div class="result-card">
+                    <h3>📝 Transcription</h3>
+                    <p id="transcriptText" style="line-height:1.6; color:#444; font-style: italic;">...</p>
+                    <a href="#" class="download-btn">Télécharger la transcription (.txt)</a>
+                </div>
+
+                <!-- Emotions Card -->
+                <div class="result-card">
+                    <h3>😊 Analyse Émotionnelle</h3>
+                    <div class="data-row">
+                        <span class="data-label">Émotion Principale</span>
+                        <span class="data-value" id="emotionPrimary">--</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Confiance</span>
+                        <span class="data-value" id="emotionConfidence">--%</span>
+                    </div>
+                </div>
+
+                <!-- Metadata Card -->
+                <div class="result-card">
+                    <h3>ℹ️ Infos Fichier</h3>
+                    <div class="data-row">
+                        <span class="data-label">Durée</span>
+                        <span class="data-value" id="fileDuration">--</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Fréquence</span>
+                        <span class="data-value" id="fileSampleRate">--</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>

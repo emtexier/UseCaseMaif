@@ -1,0 +1,210 @@
+:root {
+    --maif-red: #FC0D1A;
+    --maif-gray: #58595B;
+    --maif-black: #000000;
+    --maif-white: #FFFFFF;
+    --bg-color: #f4f6f8;
+    --text-main: #333333;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    height: 100vh;
+    overflow: hidden;
+    /* Prevent body scroll, handle in panels */
+}
+
+/* Header */
+.navbar {
+    background-color: var(--maif-white);
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    z-index: 10;
+    position: relative;
+}
+
+.brand-title {
+    color: var(--maif-red);
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: -0.5px;
+}
+
+/* Main Split Layout */
+.main-wrapper {
+    display: flex;
+    height: calc(100vh - 92px);
+    /* height minus header */
+}
+
+.split-panel {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+}
+
+/* Left Panel: Upload */
+.left-panel {
+    background-color: var(--maif-white);
+    border-right: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Right Panel: Results */
+.right-panel {
+    background-color: #FAFAFA;
+}
+
+.panel-header {
+    margin-bottom: 2rem;
+    color: var(--maif-gray);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+/* Upload Component */
+.upload-container {
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+
+.upload-area {
+    border: 2px dashed #ddd;
+    border-radius: 16px;
+    padding: 4rem 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #fff;
+    position: relative;
+}
+
+.upload-area:hover,
+.upload-area.dragover {
+    border-color: var(--maif-red);
+    background-color: rgba(252, 13, 26, 0.03);
+    transform: translateY(-2px);
+}
+
+.upload-icon {
+    font-size: 4rem;
+    color: var(--maif-red);
+    margin-bottom: 1.5rem;
+}
+
+.btn-primary {
+    background-color: var(--maif-red);
+    color: white;
+    padding: 14px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 2rem;
+    box-shadow: 0 4px 15px rgba(252, 13, 26, 0.2);
+}
+
+.btn-primary:hover {
+    background-color: #d0000b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(252, 13, 26, 0.3);
+}
+
+.btn-primary:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Download Section Cards */
+.result-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    border: 1px solid #f0f0f0;
+}
+
+.result-card h3 {
+    margin-top: 0;
+    color: var(--maif-gray);
+    font-size: 1.1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.data-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.data-label {
+    font-weight: 500;
+    color: #888;
+}
+
+.data-value {
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.download-btn {
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+    padding: 10px;
+    background-color: var(--maif-gray);
+    color: white;
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: bg 0.2s;
+}
+
+.download-btn:hover {
+    background-color: #333;
+}
+
+.hidden {
+    display: none;
+}
+
+.loader {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, .3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

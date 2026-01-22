@@ -3,11 +3,14 @@ from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
 import processor
 
+# Obtenir le répertoire du script (web/)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 app = Flask(__name__)
 
 # Configuration
-UPLOAD_FOLDER = 'wavs'
-ALLOWED_EXTENSIONS = {'wav'}
+UPLOAD_FOLDER = os.path.join(BASE_DIR, 'wavs')
+ALLOWED_EXTENSIONS = {'wav', 'mp3', 'flac', 'ogg', 'm4a', 'aac', 'wma'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -33,9 +36,12 @@ def upload_file():
         save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(save_path)
         
+        # Récupérer le choix du premier locuteur
+        first_speaker = request.form.get('first_speaker', 'maif')
+        
         # Call the external processor module
         try:
-            analysis_result = processor.process_wav(save_path)
+            analysis_result = processor.process_wav(save_path, first_speaker=first_speaker)
         except Exception as e:
             return jsonify({'error': f'Erreur lors du traitement: {str(e)}'}), 500
         
@@ -45,7 +51,7 @@ def upload_file():
             'analysis': analysis_result
         }), 200
     else:
-        return jsonify({'error': 'Type de fichier invalide. Seul le format WAV est autorisé.'}), 400
+        return jsonify({'error': 'Type de fichier invalide. Formats autorisés : WAV, MP3, FLAC, OGG, M4A, AAC, WMA'}), 400
 
 if __name__ == '__main__':
     app.run(debug=True)

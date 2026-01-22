@@ -2,7 +2,9 @@ const uploadArea = document.getElementById('uploadArea');
 const fileInput = document.getElementById('fileInput');
 const uploadBtn = document.getElementById('uploadBtn');
 const statusDiv = document.getElementById('status');
-const fileNameDisplay = document.getElementById('fileName');
+const uploadIcon = document.getElementById('uploadIcon');
+const uploadTitle = document.getElementById('uploadTitle');
+const uploadSubtitle = document.getElementById('uploadSubtitle');
 const resultsContent = document.getElementById('resultsContent');
 const emptyState = document.getElementById('emptyState');
 
@@ -37,17 +39,38 @@ function handleFiles(e) {
     const files = e.target.files;
     if (files.length > 0) {
         selectedFile = files[0];
-        if (selectedFile.name.toLowerCase().endsWith('.wav')) {
-            fileNameDisplay.textContent = selectedFile.name;
+        const allowedExtensions = ['wav', 'mp3', 'flac', 'ogg', 'm4a', 'aac', 'wma'];
+        const fileExtension = selectedFile.name.toLowerCase().split('.').pop();
+        
+        if (allowedExtensions.includes(fileExtension)) {
+            // Mettre à jour la zone d'upload avec le fichier sélectionné
+            uploadIcon.textContent = '🎵';
+            uploadTitle.textContent = selectedFile.name;
+            uploadSubtitle.textContent = 'Cliquer pour changer de fichier';
+            uploadArea.classList.add('file-selected');
+            uploadArea.classList.remove('file-error');
             uploadBtn.disabled = false;
         } else {
-            fileNameDisplay.textContent = "Erreur : Seuls les fichiers .wav sont autorisés";
+            // Erreur: mauvais format
+            uploadIcon.textContent = '⚠️';
+            uploadTitle.textContent = 'Format invalide';
+            uploadSubtitle.textContent = 'Formats acceptés : WAV, MP3, FLAC, OGG, M4A, AAC, WMA';
+            uploadArea.classList.add('file-error');
+            uploadArea.classList.remove('file-selected');
             uploadBtn.disabled = true;
             selectedFile = null;
         }
     }
 }
-
+// Fonction de réinitialisation (non utilisée actuellement)
+/*
+function resetUploadArea() {
+    uploadIcon.textContent = '☁️';
+    uploadTitle.textContent = 'Téléverser un fichier WAV';
+    uploadSubtitle.textContent = 'Glisser-déposer ou cliquer pour parcourir';
+    uploadArea.classList.remove('file-selected', 'file-error');
+}
+*/
 uploadBtn.addEventListener('click', uploadFile);
 
 async function uploadFile() {
@@ -64,6 +87,10 @@ async function uploadFile() {
 
     const formData = new FormData();
     formData.append('file', selectedFile);
+    
+    // Récupérer le choix du premier locuteur
+    const firstSpeaker = document.querySelector('input[name="firstSpeaker"]:checked').value;
+    formData.append('first_speaker', firstSpeaker);
 
     try {
         const response = await fetch('/upload', {

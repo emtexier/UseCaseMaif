@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="Logo_Maif_2019.svg.png" alt="MAIF">
+  <img src="Logo_Maif_2019.svg.png" alt="MAIF" style="height: 200px;">
   <br />
 </h1>
 

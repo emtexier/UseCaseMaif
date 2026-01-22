@@ -1,0 +1,24 @@
+[project]
+name = "usecasemaif"
+version = "0.1.0"
+description = "Pipeline de transcription audio avec diarization"
+readme = "README.md"
+authors = [
+    { name = "Antonin Rouxel", email = "antonin.rouxel44@outlook.fr" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "flask>=3.1.2",
+    "librosa>=0.11.0",
+    "pydantic>=2.12.5",
+    "pydantic-settings>=2.12.0",
+    "python-dotenv>=1.2.1",
+    "whisperx>=3.7.4",
+]
+
+[project.scripts]
+usecasemaif = "usecasemaif:main"
+
+[build-system]
+requires = ["uv_build>=0.9.21,<0.10.0"]
+build-backend = "uv_build"

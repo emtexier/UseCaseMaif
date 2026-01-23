@@ -20,6 +20,7 @@
 * **GPU recommandé** (CUDA ou Apple Silicon MPS) pour WhisperX et les modèles LLM
 * **Hugging Face token** (pour PyAnnote / diarisation WhisperX)
 * **Ollama** (voir [https://ollama.com/](https://ollama.com/))
+* **FFmpeg 7** (voir [https://www.ffmpeg.org/](https://www.ffmpeg.org/))
 
 ## Installation
 

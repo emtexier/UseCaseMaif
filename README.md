@@ -13,8 +13,6 @@
 * **Synthèse structurée** des appels,
 * **Interface web Flask**.
 
-## Contribution au projet 
-Au cours de ce projet, encadré par la MAIF, j’ai d’abord réalisé des tests préliminaires en diarisation et en transcription de conversations téléphoniques afin de valider les modèles implantés. J’ai ensuite assuré un rôle de coordination entre les équipes afin de garantir la cohérence globale du projet et le respect des délais, tout en contribuant aux différentes étapes grâce à une vision d’ensemble. Enfin, j’ai présenté et défendu ce projet, mené sur plusieurs jours, lors du workshop AI4Industry, où il a été nommé premier lauréat et sélectionné pour une présentation à la conférence DATAQUITAINE, conférence dédiée à la data science, à l’IA et à la recherche opérationnelle.
 
 ## Prérequis
 
